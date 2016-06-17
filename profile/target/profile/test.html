@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Global | Contacts</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" media="screen" href="css/reset.css">
+<link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
+<link rel="stylesheet" type="text/css" media="screen" href="css/grid_12.css">
+<style type="text/css">.thumb-image{width:200px;position:relative;padding:5px;}</style>
+<link href='http://fonts.googleapis.com/css?family=Condiment' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+<script src="js/jquery-1.7.min.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<!--[if lt IE 9]>
+<script src="js/html5.js"></script>
+<link rel="stylesheet" type="text/css" media="screen" href="css/ie.css">
+<![endif]-->
+
+<script>
+$(document).ready(function() {
+        $("#fileUpload").on('change', function() {
+          //Get count of selected files
+          var countFiles = $(this)[0].files.length;
+          var imgPath = $(this)[0].value;
+          var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
+          var image_holder = $("#image-holder");
+          image_holder.empty();
+          if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
+            if (typeof(FileReader) != "undefined") {
+              //loop for each file selected for uploaded.
+              for (var i = 0; i < countFiles; i++) 
+              {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                  $("<img />", {
+                    "src": e.target.result,
+                    "class": "thumb-image"
+                  }).appendTo(image_holder);
+                }
+                image_holder.show();
+                reader.readAsDataURL($(this)[0].files[i]);
+              }
+            } else {
+              alert("This browser does not support FileReader.");
+            }
+          } else {
+            alert("Pls select only images");
+          }
+        });
+      });
+</script>
+</head>
+
+<body>
+<div class="main">
+  <!--==============================header=================================-->
+  <header>
+    <h1><a href="index.html"><img src="images/logo.png" alt=""></a></h1>
+    <div class="form-search">
+      <form id="form-search" method="post" action="#">
+        <input type="text" value="Type here..." onBlur="if(this.value=='') this.value='Type here...'" onFocus="if(this.value =='Type here...' ) this.value=''"  />
+        <a href="#" class="search_button"></a>
+      </form>
+    </div>
+    <div class="clear"></div>
+    <nav class="box-shadow">
+      <div>
+        <ul class="menu">
+          <li class="home-page"><a href="index.html"><span></span></a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="clients.html">Clients</a></li>
+          <li class="current"><a href="contacts.html">Contacts</a></li>
+        </ul>
+        <div class="social-icons"> <span>Follow us:</span> <a href="#" class="icon-3"></a> <a href="#" class="icon-2"></a> <a href="#" class="icon-1"></a> </div>
+        <div class="clear"></div>
+      </div>
+    </nav>
+  </header>
+  <!--==============================content================================-->
+  <form id="form" method="post" action="#">
+  
+            
+              	<div id="image-holder"><img src="images/default_profile.jpg" class= "thumb-image"></div><br><br>
+              	<input id="fileUpload" multiple="multiple" type="file"/> 
+				
+			
+            
+  </form>
+</div>
+<!--==============================footer=================================-->
+<footer>
+  <p>© 2012 Global</p>
+  <p>Website Template by <a target="_blank" href="http://www.templatemonster.com/" class="link">TemplateMonster.com</a></p>
+</footer>
+</body>
+</html>
